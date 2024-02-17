@@ -1,11 +1,18 @@
 ## Single Respomsibility.js & logger.js
 
+Learning from Web Dev Simplified [YouTube video](https://www.youtube.com/@WebDevSimplified)
+
+[SRP](https://youtu.be/UQqY3_6Epbg?si=9XVgPmdjhbxuH-Om)
+[OCP](https://youtu.be/-ptMtJAdj40?si=EkcBJC9devR87bqS)
+
 ### 單一職責原則（SRP）：
 
-CalorieTracker 類別僅負責跟蹤卡路里的消耗，並在達到最大卡路里限制時發出警告。這個類別專注於一個功能，即卡路里跟蹤，這符合單一職責原則。
-logMessage 函式（在 logger.js 模塊中）負責記錄消息到控制台，也只有這一個責任。
+- 每個類別應該僅有一個變更的理由：在這個例子中，CalorieTracker 類別負責追蹤卡路里的攝取，並且當攝取超出最大允許值時發送一條日誌訊息。這個類別只有一個變更的理由，即卡路里的追蹤和超出限制的處理。這使得類別具有清晰的職責，易於理解和維護。
+
+- 將相關的功能放在一起：CalorieTracker 類別將卡路里追蹤和超出限制的處理功能組織在一起。這樣做有助於提高程式碼的可讀性和可維護性，因為相關的功能被集中在同一個地方，而不是分散在多個地方。
 
 ### 開放封閉原則（OCP）：
 
-CalorieTracker 類別是開放的，因為我們可以通過繼承和覆寫方法來擴展它的行為，而不需要修改它的源代碼。例如，如果我們想要在達到最大卡路里限制時執行其他操作，我們可以創建一個新的子類並覆寫 trackCalories 方法，而不需要修改 CalorieTracker 類別本身。
-logMessage 函式也是封閉的，因為它的實現是固定的，但是其他模塊可以使用它來記錄消息而不需要修改它的源代碼。
+- 開放（Open）：表示軟體實體（例如類別、模組、函式等）應該對擴展開放，即它們的行為應該能夠在不修改現有程式碼的情況下進行擴展。在這個範例中，當我們想要新增不同類型的問題時（如布林問題、多選問題、文字問題、範圍問題），我們只需要新增新的類別，而不需要修改 printQuiz 函式。
+
+- 封閉（Closed）：表示軟體實體應該對修改封閉，即已經存在的程式碼在新增功能時不應該被修改。在這個範例中，新增了 BooleanQuestion、MultipleChoiceQuestion、TextQuestion 和 RangeQuestion 這些類別，但沒有修改原本的 printQuiz 函式。這使得程式碼容易擴展，同時不會破壞原有的功能或相依於具體的實作細節。
