@@ -16,3 +16,11 @@ Learning from Web Dev Simplified [YouTube video](https://www.youtube.com/@WebDev
 - 開放（Open）：表示軟體實體（例如類別、模組、函式等）應該對擴展開放，即它們的行為應該能夠在不修改現有程式碼的情況下進行擴展。在這個範例中，當我們想要新增不同類型的問題時（如布林問題、多選問題、文字問題、範圍問題），我們只需要新增新的類別，而不需要修改 printQuiz 函式。
 
 - 封閉（Closed）：表示軟體實體應該對修改封閉，即已經存在的程式碼在新增功能時不應該被修改。在這個範例中，新增了 BooleanQuestion、MultipleChoiceQuestion、TextQuestion 和 RangeQuestion 這些類別，但沒有修改原本的 printQuiz 函式。這使得程式碼容易擴展，同時不會破壞原有的功能或相依於具體的實作細節。
+
+### 里氏替換原則（LSP）:
+
+**子類應該能夠替換父類並且不影響程式的正確性。**
+
+- 子類 Duck 和 Penguin 都能夠替換它們的父類 FlyingBird 和 SwimmingBird，而不會對 makeFlyingBirdFly 和 makeSwimmingBirdSwim 函數的執行產生任何影響。
+- Duck 作為 FlyingBird 的子類，它繼承了 fly 方法，同時添加了自己的 quack 方法，但這並不影響 Duck 的實例在 makeFlyingBirdFly 函數中的使用。
+- Penguin 作為 SwimmingBird 的子類，它沒有定義 fly 方法，但這並不影響 Penguin 的實例在 makeSwimmingBirdSwim 函數中的使用。
