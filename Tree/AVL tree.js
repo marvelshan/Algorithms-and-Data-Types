@@ -11,6 +11,14 @@ class AVLTree {
     this.root = null;
   }
 
+  findMin(node) {
+    let current = node;
+    while (current.left) {
+      current = current.left;
+    }
+    return current;
+  }
+
   getNodeHeight(node) {
     if (!node) return -1;
 
@@ -53,5 +61,48 @@ class AVLTree {
       node = this.leftRotation(node);
     }
     return node;
+  }
+
+  insert(data) {
+    const insertHelper = (node) => {
+      let curNode = node;
+      if (!curNode) {
+        return new BTNode(data);
+      }
+      if (data < curNode.data) {
+        curNode.left = insertHelper(curNode.left);
+      } else if (data > curNode.data) {
+        curNode.right = insertHelper(curNode.right);
+      }
+      curNode = this.balance(curNode);
+      return curNode;
+    };
+    this.root = insertHelper(this.root);
+  }
+
+  remove(data) {
+    const removeNode = (data, node) => {
+      let curNode = node;
+      if (!curNode) {
+        return false;
+      }
+
+      if (data < curNode.data) {
+        curNode.left = removeNode(data, curNode.left);
+      } else if (data > curNode.data) {
+        curNode.right = removeNode(data, curNode.right);
+      } else {
+        if (!curNode.left && !curNode.right) return null;
+        if (!curNode.left) return curNode.right;
+        if (!curNode.right) return curNode.left;
+
+        const aux = this.findMin(curNode.right);
+        curNode.data = aux.data;
+        curNode.right = removeNode(aux.data, curNode.right);
+      }
+      curNode = this.balance(curNode);
+      return curNode;
+    };
+    this.root = removeNode(data, this.root);
   }
 }
